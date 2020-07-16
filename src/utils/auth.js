@@ -7,7 +7,6 @@ const isUserAuthenticated = () => {
 };
 
 const PrivateRoute = (props) => {
-  console.log(props);
   return (
     <Fragment>
       {isUserAuthenticated() ? props.children : <Redirect to="/login" />}

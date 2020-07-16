@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { UserContext } from "../../context/Session";
 import { PrivateRoute } from "../../utils/auth";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
+import Theme from "../../utils/theme";
 import "./App.css";
 
 function App() {
@@ -15,18 +17,23 @@ function App() {
 
   return (
     <UserContext.Provider value={value}>
-      <Router>
-        <Switch>
-          <PrivateRoute>
-            <Route path="/signin"></Route>
-            <Route path="/signup"></Route>
-            <Route path="/profile"></Route>
-            <Route path="/transactions"></Route>
-            <Route path="/transaction/:id"></Route>
-            <Route path="/" exact></Route>
-          </PrivateRoute>
-        </Switch>
-      </Router>
+      <ThemeProvider theme={Theme}>
+        <CSSReset />
+        <Box bg="tomato">
+          <Router>
+            <Switch>
+              <PrivateRoute>
+                <Route path="/signin"></Route>
+                <Route path="/signup"></Route>
+                <Route path="/profile"></Route>
+                <Route path="/transactions"></Route>
+                <Route path="/transaction/:id"></Route>
+                <Route path="/" exact></Route>
+              </PrivateRoute>
+            </Switch>
+          </Router>
+        </Box>
+      </ThemeProvider>
     </UserContext.Provider>
   );
 }
