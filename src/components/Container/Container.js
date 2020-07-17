@@ -8,8 +8,7 @@ const appContentSettings = {
   fontFamily: "main",
   direction: "column",
   bg: "white",
-  borderRadius: "md",
-  padding: "10px",
+  borderRadius: "lg",
   minH: 800,
 };
 

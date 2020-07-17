@@ -8,6 +8,7 @@ import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 import Profile from "../Profile";
 import Container from "../Container";
+import Transactions from "../Transactions";
 import "./App.css";
 
 const appLayoutSettings = {
@@ -46,14 +47,11 @@ function App() {
                 <PrivateRoute path="/profile">
                   <Profile />
                 </PrivateRoute>
-                <PrivateRoute path="/transactions">
-                  Transactions Page
-                </PrivateRoute>
                 <PrivateRoute path="/transaction/:id">
                   Transaction Page
                 </PrivateRoute>
                 <PrivateRoute path="/" exact>
-                  Index page
+                  <Transactions />
                 </PrivateRoute>
               </Container>
             </Switch>
