@@ -1,17 +1,31 @@
-import React, { Fragment } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 const isUserAuthenticated = () => {
-  const cachedUser = localStorage.getItem("user");
-  return cachedUser ? true : false;
+  const cachedUser = localStorage.getItem("userData");
+  return !!cachedUser;
 };
 
-const PrivateRoute = (props) => {
+function PrivateRoute({ children, ...rest }) {
   return (
-    <Fragment>
-      {isUserAuthenticated() ? props.children : <Redirect to="/login" />}
-    </Fragment>
+    <Route
+      {...rest}
+      render={() =>
+        isUserAuthenticated() ? children : <Redirect to="/signin" />
+      }
+    />
   );
-};
+}
 
-export { PrivateRoute };
+function GuestRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        isUserAuthenticated() ? <Redirect to="/profile" /> : children
+      }
+    />
+  );
+}
+
+export { isUserAuthenticated, PrivateRoute, GuestRoute };

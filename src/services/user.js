@@ -1,4 +1,4 @@
-import { apiUrl, objectToSnake } from "../utils";
+import { apiUrl, objectToSnake } from "../utils/common";
 
 export const fetchUser = async (token) => {
   try {
@@ -25,7 +25,7 @@ export const createUser = async (userData) => {
   try {
     const response = await fetch(`${apiUrl}/users`, {
       method: "POST",
-      body: JSON.stringify({ user: objectToSnake(userData) }),
+      body: JSON.stringify(objectToSnake(userData)),
       headers: {
         "content-type": "application/json",
       },

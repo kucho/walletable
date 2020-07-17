@@ -11,4 +11,9 @@ const objectToSnake = (obj) => {
   return newObject;
 };
 
-export { toSnakeCase, objectToSnake, apiUrl };
+const capitalize = (s) => {
+  if (typeof s !== "string") return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
+export { toSnakeCase, objectToSnake, apiUrl, capitalize };

@@ -1,6 +1,6 @@
-import { apiUrl } from "../utils";
+import { apiUrl } from "../utils/common";
 
-export const loginUser = async (loginInfo) => {
+const loginUser = async (loginInfo) => {
   try {
     const response = await fetch(`${apiUrl}/login`, {
       method: "POST",
@@ -20,3 +20,5 @@ export const loginUser = async (loginInfo) => {
     return { error: "Network error" };
   }
 };
+
+export { loginUser };

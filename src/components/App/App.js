@@ -1,38 +1,58 @@
 import React, { useState } from "react";
 import { UserContext } from "../../context/Session";
-import { PrivateRoute } from "../../utils/auth";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
+import { PrivateRoute, GuestRoute } from "../../utils/auth";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { ThemeProvider, CSSReset, Flex } from "@chakra-ui/core";
 import Theme from "../../utils/theme";
+import SignIn from "../SignIn";
+import SignUp from "../SignUp";
 import "./App.css";
 
-function App() {
-  const [user, setUser] = useState({});
-  const value = { user, setUser };
+const appLayoutSettings = {
+  bg: "indigo.800",
+  minH: "100vh",
+  w: "100%",
+  align: "center",
+  direction: "column",
+};
 
-  const cachedUser = localStorage.getItem("user");
+function App() {
+  const [userData, setUserData] = useState({});
+  const value = { userData, setUserData };
+  const cachedUser = localStorage.getItem("userData");
+
   if (cachedUser) {
-    setUser({ user: JSON.parse(cachedUser) });
+    if (JSON.stringify(userData) !== cachedUser) {
+      setUserData(JSON.parse(cachedUser));
+    }
   }
 
   return (
     <UserContext.Provider value={value}>
       <ThemeProvider theme={Theme}>
         <CSSReset />
-        <Box bg="tomato">
+        <Flex {...appLayoutSettings}>
           <Router>
             <Switch>
-              <PrivateRoute>
-                <Route path="/signin"></Route>
-                <Route path="/signup"></Route>
-                <Route path="/profile"></Route>
-                <Route path="/transactions"></Route>
-                <Route path="/transaction/:id"></Route>
-                <Route path="/" exact></Route>
+              <GuestRoute path="/signin">
+                <SignIn />
+              </GuestRoute>
+              <GuestRoute path="/signup">
+                <SignUp />
+              </GuestRoute>
+              <PrivateRoute path="/profile">Profile page</PrivateRoute>
+              <PrivateRoute path="/transactions">
+                Transactions Page
+              </PrivateRoute>
+              <PrivateRoute path="/transaction/:id">
+                Transaction Page
+              </PrivateRoute>
+              <PrivateRoute path="/" exact>
+                Index page
               </PrivateRoute>
             </Switch>
           </Router>
-        </Box>
+        </Flex>
       </ThemeProvider>
     </UserContext.Provider>
   );
