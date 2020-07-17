@@ -12,6 +12,7 @@ const ScreenLink = ({ children, to, icon, ...rest }) => {
 
   let textSettings = {
     color: "gray.500",
+    borderBottom: "2px solid transparent",
   };
 
   if (active) {
