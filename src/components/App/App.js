@@ -6,6 +6,7 @@ import { ThemeProvider, CSSReset, Flex } from "@chakra-ui/core";
 import Theme from "../../utils/theme";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
+import Container from "../Container";
 import "./App.css";
 
 const appLayoutSettings = {
@@ -40,16 +41,18 @@ function App() {
               <GuestRoute path="/signup">
                 <SignUp />
               </GuestRoute>
-              <PrivateRoute path="/profile">Profile page</PrivateRoute>
-              <PrivateRoute path="/transactions">
-                Transactions Page
-              </PrivateRoute>
-              <PrivateRoute path="/transaction/:id">
-                Transaction Page
-              </PrivateRoute>
-              <PrivateRoute path="/" exact>
-                Index page
-              </PrivateRoute>
+              <Container>
+                <PrivateRoute path="/profile">Profile page</PrivateRoute>
+                <PrivateRoute path="/transactions">
+                  Transactions Page
+                </PrivateRoute>
+                <PrivateRoute path="/transaction/:id">
+                  Transaction Page
+                </PrivateRoute>
+                <PrivateRoute path="/" exact>
+                  Index page
+                </PrivateRoute>
+              </Container>
             </Switch>
           </Router>
         </Flex>
