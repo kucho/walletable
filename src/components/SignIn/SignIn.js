@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import SignInForm from "./SignInForm";
 import { Text } from "@chakra-ui/core";
 import { UserContext } from "../../context/Session";
-import FormPage from "../FormPage";
+import FormPageLayout from "../FormPageLayout";
 import Emoji from "../Emoji";
 
 const SignIn = () => {
@@ -21,7 +21,7 @@ const SignIn = () => {
     "Signin to start enjoying your new money management super powers!";
 
   return (
-    <FormPage title={title} message={message}>
+    <FormPageLayout title={title} message={message}>
       <SignInForm
         style={{ margin: "1rem" }}
         onSuccess={(data) => {
@@ -30,7 +30,7 @@ const SignIn = () => {
           history.replace(from);
         }}
       />
-    </FormPage>
+    </FormPageLayout>
   );
 };
 

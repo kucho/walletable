@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import FormPage from "../FormPage";
+import FormPageLayout from "../FormPageLayout";
 import { UserContext } from "../../context/Session";
 import { Text } from "@chakra-ui/core";
 import Emoji from "../Emoji";
@@ -18,7 +18,7 @@ const SignUp = () => {
     "Signup to start enjoying you new money management super powers!";
 
   return (
-    <FormPage title={title} message={message}>
+    <FormPageLayout title={title} message={message}>
       <SignUpForm
         style={{ margin: "1rem" }}
         onSuccess={(data) => {
@@ -27,7 +27,7 @@ const SignUp = () => {
           history.replace("/");
         }}
       />
-    </FormPage>
+    </FormPageLayout>
   );
 };
 

@@ -12,7 +12,7 @@ const containerSettings = {
   fontFamily: "main",
 };
 
-const FormPage = ({ children, title, message }) => {
+const FormPageLayout = ({ children, title, message }) => {
   return (
     <Flex {...containerSettings} width="1/2">
       <Link to="/">
@@ -27,4 +27,4 @@ const FormPage = ({ children, title, message }) => {
   );
 };
 
-export default FormPage;
+export default FormPageLayout;
