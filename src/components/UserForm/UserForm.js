@@ -21,18 +21,32 @@ const schema = yup.object().shape({
     .max(40, "Maximum 40 characters"),
   passwordConfirmation: yup
     .mixed()
-    .oneOf([yup.ref("password"), null], "Password does not match"),
+    .oneOf([yup.ref("password")], "Password does not match")
+    .required("Repeat your password"),
 });
 
-const UserForm = ({ inputSettings, style, onSubmit, children }) => {
+const UserForm = ({
+  labelSettings,
+  inputSettings,
+  defaultValues,
+  style,
+  onSubmit,
+  children,
+}) => {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
+    defaultValues,
   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={style}>
       <FormControl isInvalid={errors.firstName} textAlign="left" mb="1rem">
-        <FormLabel htmlFor="firstName" fontWeight="bold" fontSize="sm">
+        <FormLabel
+          htmlFor="firstName"
+          fontWeight="bold"
+          fontSize="sm"
+          {...labelSettings}
+        >
           First name
         </FormLabel>
         <Input
@@ -45,7 +59,12 @@ const UserForm = ({ inputSettings, style, onSubmit, children }) => {
         <FormErrorMessage>{errors.firstName?.message}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={errors.lastName} textAlign="left" mb="1rem">
-        <FormLabel htmlFor="lastName" fontWeight="bold" fontSize="sm">
+        <FormLabel
+          htmlFor="lastName"
+          fontWeight="bold"
+          fontSize="sm"
+          {...labelSettings}
+        >
           Last name
         </FormLabel>
         <Input
@@ -58,7 +77,12 @@ const UserForm = ({ inputSettings, style, onSubmit, children }) => {
         <FormErrorMessage>{errors.lastName?.message}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={errors.phone} textAlign="left" mb="1rem">
-        <FormLabel htmlFor="phone" fontWeight="bold" fontSize="sm">
+        <FormLabel
+          htmlFor="phone"
+          fontWeight="bold"
+          fontSize="sm"
+          {...labelSettings}
+        >
           Phone number
         </FormLabel>
         <Input
@@ -71,7 +95,12 @@ const UserForm = ({ inputSettings, style, onSubmit, children }) => {
         <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={errors.email} textAlign="left" mb="1rem">
-        <FormLabel htmlFor="name" fontWeight="bold" fontSize="sm">
+        <FormLabel
+          htmlFor="name"
+          fontWeight="bold"
+          fontSize="sm"
+          {...labelSettings}
+        >
           Email Address
         </FormLabel>
         <Input
@@ -83,8 +112,13 @@ const UserForm = ({ inputSettings, style, onSubmit, children }) => {
         />
         <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
-      <FormControl isInvalid={errors.password} textAlign="left">
-        <FormLabel htmlFor="password" fontWeight="bold" fontSize="sm">
+      <FormControl isInvalid={errors.password} textAlign="left" mb="1rem">
+        <FormLabel
+          htmlFor="password"
+          fontWeight="bold"
+          fontSize="sm"
+          {...labelSettings}
+        >
           Password
         </FormLabel>
         <Input
@@ -101,6 +135,7 @@ const UserForm = ({ inputSettings, style, onSubmit, children }) => {
           htmlFor="passwordConfirmation"
           fontWeight="bold"
           fontSize="sm"
+          {...labelSettings}
         >
           Confirm Password
         </FormLabel>

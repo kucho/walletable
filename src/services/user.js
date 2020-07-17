@@ -46,7 +46,7 @@ export const updateUser = async (token, newData) => {
   try {
     const response = await fetch(`${apiUrl}/edit_user`, {
       method: "PATCH",
-      body: JSON.stringify({ user: objectToSnake(newData) }),
+      body: JSON.stringify(objectToSnake(newData)),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

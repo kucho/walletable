@@ -8,9 +8,9 @@ const appContentSettings = {
   fontFamily: "main",
   direction: "column",
   bg: "white",
-  size: "xl",
   borderRadius: "md",
   padding: "10px",
+  minH: 800,
 };
 
 const Container = ({ children }) => {

@@ -6,6 +6,7 @@ import { ThemeProvider, CSSReset, Flex } from "@chakra-ui/core";
 import Theme from "../../utils/theme";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
+import Profile from "../Profile";
 import Container from "../Container";
 import "./App.css";
 
@@ -42,7 +43,9 @@ function App() {
                 <SignUp />
               </GuestRoute>
               <Container>
-                <PrivateRoute path="/profile">Profile page</PrivateRoute>
+                <PrivateRoute path="/profile">
+                  <Profile />
+                </PrivateRoute>
                 <PrivateRoute path="/transactions">
                   Transactions Page
                 </PrivateRoute>

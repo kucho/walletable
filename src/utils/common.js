@@ -5,10 +5,26 @@ const toSnakeCase = (str) =>
 
 const objectToSnake = (obj) => {
   const newObject = {};
-  for (let key in obj) {
-    newObject[toSnakeCase(key)] = obj[key];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      newObject[toSnakeCase(key)] = obj[key];
+    }
   }
   return newObject;
+};
+
+const camelCase = (obj) => {
+  const newObj = {};
+  for (const d in obj) {
+    if (obj.hasOwnProperty(d)) {
+      newObj[
+        d.replace(/(_\w)/g, function (k) {
+          return k[1].toUpperCase();
+        })
+      ] = obj[d];
+    }
+  }
+  return newObj;
 };
 
 const capitalize = (s) => {
@@ -16,4 +32,4 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-export { toSnakeCase, objectToSnake, apiUrl, capitalize };
+export { toSnakeCase, objectToSnake, camelCase, apiUrl, capitalize };
