@@ -1,7 +1,7 @@
 import React from "react";
 import ScreenLink from "./ScreenLink";
-import {NavLink, useHistory} from "react-router-dom";
-import {Box, Flex, Link} from "@chakra-ui/core";
+import { NavLink, useHistory } from "react-router-dom";
+import { Box, Flex, Link } from "@chakra-ui/core";
 import transactionIcon from "../../images/icons/transactions.svg";
 import reportsIcon from "../../images/icons/reports.svg";
 
