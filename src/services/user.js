@@ -1,6 +1,6 @@
 import { apiUrl, objectToSnake } from "../utils/common";
 
-export const fetchUser = async (token) => {
+export const getUser = async (token) => {
   try {
     const response = await fetch(`${apiUrl}/user`, {
       method: "GET",
