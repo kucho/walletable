@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { UserContext } from "../../context/Session";
-import { PrivateRoute, GuestRoute } from "../../utils/auth";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { ThemeProvider, CSSReset, Flex } from "@chakra-ui/core";
+import React, {useState} from "react";
+import {UserContext} from "../../context/Session";
+import {GuestRoute, PrivateRoute} from "../../utils/auth";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {CSSReset, Flex, ThemeProvider} from "@chakra-ui/core";
 import Theme from "../../utils/theme";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
@@ -50,9 +50,12 @@ function App() {
                 <PrivateRoute path="/transaction/:id">
                   Transaction Page
                 </PrivateRoute>
-                <PrivateRoute path="/" exact>
+                <PrivateRoute path="/transactions">
                   <Transactions />
                 </PrivateRoute>
+                <Route path="/" exact>
+                  Home Page
+                </Route>
               </Container>
             </Switch>
           </Router>

@@ -1,7 +1,7 @@
 import React from "react";
 import ScreenLink from "./ScreenLink";
-import { useHistory, NavLink } from "react-router-dom";
-import { Flex, Box, Link } from "@chakra-ui/core";
+import {NavLink, useHistory} from "react-router-dom";
+import {Box, Flex, Link} from "@chakra-ui/core";
 import transactionIcon from "../../images/icons/transactions.svg";
 import reportsIcon from "../../images/icons/reports.svg";
 
@@ -17,8 +17,8 @@ const Header = () => {
       >
         <Flex direction="row" justify="center" align="center">
           <ScreenLink
-            to="/"
-            isActive={"/" === history.location.pathname}
+            to="/transactions"
+            isActive={"/transactions" === history.location.pathname}
             icon={transactionIcon}
             mr={[1, 1, 4, 8]}
           >
