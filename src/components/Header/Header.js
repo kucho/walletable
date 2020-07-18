@@ -40,7 +40,7 @@ const Header = () => {
             color="indigo.600"
             onClick={() => {
               localStorage.clear();
-              history.push("/");
+              history.push("/signin");
             }}
           >
             Logout

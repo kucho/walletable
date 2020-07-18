@@ -53,3 +53,26 @@ export const Categories = {
 export const numberWithCommas = (n) => {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+export async function fetchWrapper(url, method, token, body) {
+  try {
+    const response = await fetch(url, {
+      method: method,
+      body: body ? JSON.stringify(objectToSnake(body)) : undefined,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+      return { data };
+    } else {
+      response.status === 401 && localStorage.clear();
+      return { error: data.errors };
+    }
+  } catch (error) {
+    return { error: "Network error" };
+  }
+}
