@@ -10,6 +10,7 @@ const appContentSettings = {
   bg: "white",
   borderRadius: "lg",
   minH: 800,
+  mb: 10,
 };
 
 const Container = ({ children }) => {

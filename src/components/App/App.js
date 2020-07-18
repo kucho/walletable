@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {UserContext} from "../../context/Session";
-import {GuestRoute, PrivateRoute} from "../../utils/auth";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {CSSReset, Flex, ThemeProvider} from "@chakra-ui/core";
+import React from "react";
+import { UserContext } from "../../context/userContext";
+import { GuestRoute, PrivateRoute } from "../../utils/auth";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { CSSReset, Flex, ThemeProvider } from "@chakra-ui/core";
 import Theme from "../../utils/theme";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
@@ -10,6 +10,7 @@ import Profile from "../Profile";
 import Container from "../Container";
 import Transactions from "../Transactions";
 import "./App.css";
+import { useUser } from "../../hooks/useUser";
 
 const appLayoutSettings = {
   bg: "indigo.800",
@@ -20,18 +21,9 @@ const appLayoutSettings = {
 };
 
 function App() {
-  const [userData, setUserData] = useState({});
-  const value = { userData, setUserData };
-  const cachedUser = localStorage.getItem("userData");
-
-  if (cachedUser) {
-    if (JSON.stringify(userData) !== cachedUser) {
-      setUserData(JSON.parse(cachedUser));
-    }
-  }
-
+  const [userData, setUserData] = useUser();
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={{ userData, setUserData }}>
       <ThemeProvider theme={Theme}>
         <CSSReset />
         <Flex {...appLayoutSettings}>
@@ -47,10 +39,10 @@ function App() {
                 <PrivateRoute path="/profile">
                   <Profile />
                 </PrivateRoute>
-                <PrivateRoute path="/transaction/:id">
+                <PrivateRoute path="/transactions/:id">
                   Transaction Page
                 </PrivateRoute>
-                <PrivateRoute path="/transactions">
+                <PrivateRoute path="/transactions" exact>
                   <Transactions />
                 </PrivateRoute>
                 <Route path="/" exact>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import SignInForm from "./SignInForm";
 import { Text } from "@chakra-ui/core";
-import { UserContext } from "../../context/Session";
+import { UserContext } from "../../context/userContext";
 import FormPageLayout from "../FormPageLayout";
 import Emoji from "../Emoji";
 

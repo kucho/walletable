@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import FormPageLayout from "../FormPageLayout";
-import { UserContext } from "../../context/Session";
+import { UserContext } from "../../context/userContext";
 import { Text } from "@chakra-ui/core";
 import Emoji from "../Emoji";
 import SignUpForm from "./SignUpForm";

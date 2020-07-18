@@ -10,13 +10,13 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Link,
   Input,
+  Link,
   Select,
   useToast,
 } from "@chakra-ui/core";
 import { format } from "date-fns";
-import { UserContext } from "../../context/Session";
+import { UserContext } from "../../context/userContext";
 
 const labelSettings = {
   fontSize: "sm",
@@ -39,7 +39,7 @@ const schema = yup.object().shape({
     .oneOf([...Object.keys(Categories)], "select a category"),
 });
 
-const TransactionForm = ({ onCancel }) => {
+const TransactionForm = ({ onCancel, onSuccess }) => {
   const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -48,11 +48,12 @@ const TransactionForm = ({ onCancel }) => {
   });
 
   let toast = useToast();
-
   const { userData } = useContext(UserContext);
-  const onSubmit = async (form) => {
+
+  const onSave = async (form) => {
     const { data, error } = await createTransaction(userData.token, form);
     if (!error) {
+      onSuccess(data);
       reset({ date: format(new Date(), "yyyy-MM-dd") });
       toast({
         description: "Transaction added successfully.",
@@ -71,7 +72,7 @@ const TransactionForm = ({ onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
+    <form onSubmit={handleSubmit(onSave)} style={{ width: "100%" }}>
       <Flex justify="space-between" mb={5}>
         <FormControl isInvalid={errors.category}>
           <FormLabel htmlFor="category" {...labelSettings}>

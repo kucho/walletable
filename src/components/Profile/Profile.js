@@ -4,7 +4,7 @@ import { Flex, Button, Image, useToast } from "@chakra-ui/core";
 import UserForm from "../UserForm";
 import profileIcon from "../../images/icons/profile.svg";
 import { camelCase } from "../../utils/common";
-import { UserContext } from "../../context/Session";
+import { UserContext } from "../../context/userContext";
 
 const inputStyleSettings = {
   fontSize: 13,

@@ -1,21 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/core";
 import TransactionList from "./TransactionList";
 import Swappable from "./Swappable";
+import { UserContext } from "../../context/userContext";
+import { getTransactions } from "../../services/transaction";
 
 const Transactions = () => {
-  const [transactions, setTransactions] = useState([]);
-  const cachedTransactions = localStorage.getItem("transactions");
-  if (Array.isArray(cachedTransactions) && cachedTransactions.length) {
-    setTransactions({ transactions: JSON.parse(cachedTransactions) });
-  } else {
-    // Fetch transactions again
-  }
+  const cachedTransactions = JSON.parse(localStorage.getItem("transactions"));
+  const [transactions, setTransactions] = useState(cachedTransactions || []);
 
-  // Update localStorage on every change
+  const { userData } = useContext(UserContext);
+  const token = userData.token;
+
+  // Check transitions everytime
   useEffect(() => {
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-  }, [transactions]);
+    const fetchTransaction = async () => {
+      const { data, error } = await getTransactions(token);
+      if (!error) {
+        const sortedData = data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        // Only update the cache and state if there's change
+        if (JSON.stringify(sortedData) !== JSON.stringify(transactions)) {
+          console.log("Updating transactions...");
+          setTransactions(sortedData);
+          localStorage.setItem("transactions", JSON.stringify(sortedData));
+        }
+      }
+    };
+    fetchTransaction().then();
+  });
+
+  const balance = transactions.reduce((acc, trans) => acc + trans.amount, 0);
 
   return (
     <Flex direction="column">
@@ -25,7 +41,12 @@ const Transactions = () => {
         justify="space-between"
         align="center"
       >
-        <Swappable />
+        <Swappable
+          balance={balance}
+          onSuccess={(transaction) =>
+            setTransactions([transaction, ...transactions])
+          }
+        />
       </Flex>
       <TransactionList data={transactions} />
     </Flex>

@@ -1,17 +1,17 @@
 import forkIcon from "../images/icons/fork.svg";
 import bagIcon from "../images/icons/shopping-bag.svg";
 import houseIcon from "../images/icons/house.svg";
-import transportIcon from "../images/icons/transactions.svg";
+import transportIcon from "../images/icons/car.svg";
 import incomeIcon from "../images/icons/coins.svg";
 import otherIcon from "../images/icons/other.svg";
 import utilitiesIcon from "../images/icons/utilities.svg";
 
-const apiUrl = "http://localhost:3000";
+export const apiUrl = "http://localhost:3000";
 
-const toSnakeCase = (str) =>
+export const toSnakeCase = (str) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
-const objectToSnake = (obj) => {
+export const objectToSnake = (obj) => {
   const newObject = {};
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -21,7 +21,7 @@ const objectToSnake = (obj) => {
   return newObject;
 };
 
-const camelCase = (obj) => {
+export const camelCase = (obj) => {
   const newObj = {};
   for (const d in obj) {
     if (obj.hasOwnProperty(d)) {
@@ -35,12 +35,12 @@ const camelCase = (obj) => {
   return newObj;
 };
 
-const capitalize = (s) => {
+export const capitalize = (s) => {
   if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-const Categories = {
+export const Categories = {
   food_and_drinks: { label: "Food & Drinks", icon: forkIcon, bg: "red.600" },
   others: { label: "Others", icon: otherIcon, bg: "gray.600" },
   shopping: { label: "Shopping", icon: bagIcon, bg: "blue.400" },
@@ -50,11 +50,6 @@ const Categories = {
   income: { label: "Income", icon: incomeIcon, bg: "green.400" },
 };
 
-export {
-  toSnakeCase,
-  objectToSnake,
-  camelCase,
-  apiUrl,
-  capitalize,
-  Categories,
+export const numberWithCommas = (n) => {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
