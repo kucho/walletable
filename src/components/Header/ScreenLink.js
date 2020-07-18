@@ -34,7 +34,7 @@ const ScreenLink = ({ children, to, icon, ...rest }) => {
       {...textSettings}
       _active={{ outline: "none" }}
       _focus={{ outline: "none" }}
-      onClick={() => !active && history.push(to)}
+      onClick={() => history.push(to)}
     >
       <Image src={icon} alt={to} mr={[1, 1, 2, 2]} style={{ ...imageFilter }} />
       {children}
