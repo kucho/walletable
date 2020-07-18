@@ -1,0 +1,160 @@
+import React, { useContext } from "react";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
+import { Categories } from "../../utils/common";
+import { createTransaction } from "../../services/transaction";
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Link,
+  Input,
+  Select,
+  useToast,
+} from "@chakra-ui/core";
+import { format } from "date-fns";
+import { UserContext } from "../../context/Session";
+
+const labelSettings = {
+  fontSize: "sm",
+};
+const inputSettings = {
+  fontSize: "sm",
+};
+
+const schema = yup.object().shape({
+  amount: yup.number().typeError("amount must be numeric").required(),
+  date: yup
+    .date()
+    .required()
+    .max(new Date() + 1, "only past dates are permitted"),
+  payee: yup.string().required(),
+  description: yup.string().required(),
+  category: yup
+    .mixed()
+    .required()
+    .oneOf([...Object.keys(Categories)], "select a category"),
+});
+
+const TransactionForm = ({ onCancel }) => {
+  const { register, handleSubmit, errors, reset } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      date: format(new Date(), "yyyy-MM-dd"),
+    },
+  });
+
+  let toast = useToast();
+
+  const { userData } = useContext(UserContext);
+  const onSubmit = async (form) => {
+    const { data, error } = await createTransaction(userData.token, form);
+    if (!error) {
+      reset({ date: format(new Date(), "yyyy-MM-dd") });
+      toast({
+        description: "Transaction added successfully.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        description: "We could not add your transaction. Try again.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
+      <Flex justify="space-between" mb={5}>
+        <FormControl isInvalid={errors.category}>
+          <FormLabel htmlFor="category" {...labelSettings}>
+            Category
+          </FormLabel>
+          <Select
+            name="category"
+            id="category"
+            ref={register}
+            {...inputSettings}
+            placeholder="Select category"
+          >
+            {Object.entries(Categories).map(([k, v]) => (
+              <option key={k} value={k}>
+                {v.label}
+              </option>
+            ))}
+          </Select>
+          <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={errors.payee} w="138px">
+          <FormLabel htmlFor="payee" {...labelSettings}>
+            Payee
+          </FormLabel>
+          <Input
+            name="payee"
+            id="payee"
+            placeholder="John..."
+            ref={register}
+            {...inputSettings}
+          />
+          <FormErrorMessage>{errors.payee?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={errors.description}>
+          <FormLabel htmlFor="description" {...labelSettings}>
+            Description
+          </FormLabel>
+          <Input
+            name="description"
+            id="description"
+            placeholder="Rent, internet..."
+            ref={register}
+            {...inputSettings}
+          />
+          <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={errors.date} w="180px">
+          <FormLabel htmlFor="date" {...labelSettings}>
+            Date
+          </FormLabel>
+          <Input
+            name="date"
+            id="date"
+            type="date"
+            ref={register}
+            {...inputSettings}
+          />
+          <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={errors.amount} w="77px">
+          <FormLabel htmlFor="amount" {...labelSettings}>
+            Amount
+          </FormLabel>
+          <Input name="amount" id="amount" ref={register} {...inputSettings} />
+          <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
+        </FormControl>
+      </Flex>
+      <Flex justify="flex-end" align="center">
+        <Link fontSize="sm" onClick={onCancel} mr={5}>
+          Cancel
+        </Link>
+        <Button
+          size="sm"
+          bg="indigo.500"
+          color="white"
+          _hover={{ bg: "indigo.800" }}
+          type={"submit"}
+        >
+          Save Transaction
+        </Button>
+      </Flex>
+    </form>
+  );
+};
+
+export default TransactionForm;
