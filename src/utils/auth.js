@@ -7,13 +7,18 @@ const isUserAuthenticated = () => {
 };
 
 function PrivateRoute({ children, path }) {
+  console.log();
   return (
     <Route
       path={path}
       exact
       render={(props) =>
         isUserAuthenticated() ? (
-          React.cloneElement(children, { router: props })
+          children.type ? (
+            React.cloneElement(children, { router: props })
+          ) : (
+            children
+          )
         ) : (
           <Redirect to="/signin" />
         )
@@ -30,8 +35,10 @@ function GuestRoute({ children, path }) {
       render={(props) =>
         isUserAuthenticated() ? (
           <Redirect to="/profile" />
-        ) : (
+        ) : children.type ? (
           React.cloneElement(children, { router: props })
+        ) : (
+          children
         )
       }
     />
