@@ -6,7 +6,7 @@ import incomeIcon from "../images/icons/coins.svg";
 import otherIcon from "../images/icons/other.svg";
 import utilitiesIcon from "../images/icons/utilities.svg";
 
-export const apiUrl = "http://localhost:3000";
+export const apiUrl = "https://walletable-api.herokuapp.com";
 
 export const toSnakeCase = (str) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
