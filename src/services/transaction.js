@@ -20,3 +20,7 @@ export const updateTransaction = async (token, id, newData) => {
     newData
   );
 };
+
+export const deleteTransaction = async (token, id) => {
+  return await fetchWrapper(`${apiUrl}/transactions/${id}`, "DELETE", token);
+};

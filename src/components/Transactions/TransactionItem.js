@@ -10,7 +10,7 @@ const TransactionItem = ({ data }) => {
   return (
     <TableRow
       _hover={{ cursor: "pointer", bg: "indigo.100" }}
-      onClick={() => history.push(`/transactions/${data.id}`)}
+      onClick={() => history.push(`/transactions/${data.id}/edit`)}
     >
       <TableCell>
         <Flex align="center">

@@ -9,6 +9,7 @@ import SignUp from "../SignUp";
 import Profile from "../Profile";
 import Container from "../Container";
 import Transactions from "../Transactions";
+import EditTransaction from "../Transaction";
 import "./App.css";
 import { useUser } from "../../hooks/useUser";
 
@@ -39,8 +40,8 @@ function App() {
                 <PrivateRoute path="/profile">
                   <Profile />
                 </PrivateRoute>
-                <PrivateRoute path="/transactions/:id">
-                  Transaction Page
+                <PrivateRoute path="/transactions/:id/edit">
+                  <EditTransaction />
                 </PrivateRoute>
                 <PrivateRoute path="/transactions" exact>
                   <Transactions />

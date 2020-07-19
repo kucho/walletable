@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers";
 import { Categories } from "../../utils/common";
@@ -17,6 +16,7 @@ import {
 } from "@chakra-ui/core";
 import { format } from "date-fns";
 import { UserContext } from "../../context/userContext";
+import schema from "../../schemas/Transaction";
 
 const labelSettings = {
   fontSize: "sm",
@@ -24,20 +24,6 @@ const labelSettings = {
 const inputSettings = {
   fontSize: "sm",
 };
-
-const schema = yup.object().shape({
-  amount: yup.number().typeError("amount must be numeric").required(),
-  date: yup
-    .date()
-    .required()
-    .max(new Date() + 1, "only past dates are permitted"),
-  payee: yup.string().required(),
-  description: yup.string().required(),
-  category: yup
-    .mixed()
-    .required()
-    .oneOf([...Object.keys(Categories)], "select a category"),
-});
 
 const TransactionForm = ({ onCancel, onSuccess }) => {
   const { register, handleSubmit, errors, reset } = useForm({

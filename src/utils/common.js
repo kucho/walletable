@@ -64,13 +64,17 @@ export async function fetchWrapper(url, method, token, body) {
         Authorization: token ? `Bearer ${token}` : undefined,
       },
     });
-    const data = await response.json();
+
+    let data;
 
     if (response.ok) {
+      if (response.status !== 204) {
+        data = await response.json();
+      }
       return { data };
     } else {
       response.status === 401 && localStorage.clear();
-      return { error: data.errors };
+      return { error: response.errors };
     }
   } catch (error) {
     return { error: "Network error" };

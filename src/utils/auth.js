@@ -6,23 +6,33 @@ const isUserAuthenticated = () => {
   return !!cachedUser;
 };
 
-function PrivateRoute({ children, ...rest }) {
+function PrivateRoute({ children, path }) {
   return (
     <Route
-      {...rest}
-      render={() =>
-        isUserAuthenticated() ? children : <Redirect to="/signin" />
+      path={path}
+      exact
+      render={(props) =>
+        isUserAuthenticated() ? (
+          React.cloneElement(children, { router: props })
+        ) : (
+          <Redirect to="/signin" />
+        )
       }
     />
   );
 }
 
-function GuestRoute({ children, ...rest }) {
+function GuestRoute({ children, path }) {
   return (
     <Route
-      {...rest}
-      render={() =>
-        isUserAuthenticated() ? <Redirect to="/profile" /> : children
+      path={path}
+      exact
+      render={(props) =>
+        isUserAuthenticated() ? (
+          <Redirect to="/profile" />
+        ) : (
+          React.cloneElement(children, { router: props })
+        )
       }
     />
   );
