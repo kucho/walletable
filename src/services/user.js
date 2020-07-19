@@ -5,7 +5,7 @@ export const getUser = async (token) => {
 };
 
 export const createUser = async (userData) => {
-  return await fetchWrapper(`${apiUrl}/edit_user`, "POST", null, userData);
+  return await fetchWrapper(`${apiUrl}/users`, "POST", null, userData);
 };
 
 export const updateUser = async (token, newData) => {
