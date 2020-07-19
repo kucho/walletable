@@ -1,11 +1,22 @@
 import React from "react";
 import phonesImg from "../../images/phones_desktop.png";
-import { Box, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
 
 const Landing = () => {
+  const history = useHistory();
   return (
-    <Flex flexGrow={1}>
-      <Flex justify="space-evenly" w="100%" my="8rem" position="relative">
+    <Flex flexGrow={1} align="center">
+      <Flex justify="space-evenly" w="100%" h="400px" position="relative">
         <Box
           top="10%"
           position="absolute"
@@ -45,13 +56,21 @@ const Landing = () => {
         <Flex
           direction="column"
           w="500px"
+          p="5rem"
           align="center"
           textAlign="center"
           justify="space-evenly"
         >
-          <Heading size="2xl" zIndex="2">
+          <Heading size="xl" zIndex="2">
             Your Finances in One Place
           </Heading>
+          <Button
+            variant="solid"
+            zIndex="2"
+            onClick={() => history.push("/signup")}
+          >
+            SIGN UP NOW
+          </Button>
         </Flex>
         <Image w="300px" src={phonesImg} alt="app" zIndex="2" />
       </Flex>
