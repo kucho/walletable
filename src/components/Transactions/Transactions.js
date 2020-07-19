@@ -12,7 +12,7 @@ const Transactions = () => {
   const balance = transactions.reduce((acc, trans) => acc + trans.amount, 0);
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" flexGrow="1">
       <Flex
         bg="indigo.100"
         p="25px 15px"

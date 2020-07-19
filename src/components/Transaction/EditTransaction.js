@@ -77,7 +77,7 @@ const EditTransaction = ({ router }) => {
 
   return (
     <TransactionForm
-      style={{ width: "200px", margin: "2rem auto" }}
+      style={{ width: "200px", margin: "2rem auto", flexGrow: 1 }}
       labelSettings={labelSettings}
       inputSettings={inputSettings}
       value={transaction}

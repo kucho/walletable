@@ -48,7 +48,7 @@ const Profile = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" mb={20}>
       <Flex
         size={52}
         bg="gray.500"
