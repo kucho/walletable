@@ -12,6 +12,7 @@ import Transactions from "../Transactions";
 import EditTransaction from "../Transaction";
 import "./App.css";
 import { useUser } from "../../hooks/useUser";
+import LandingPage from "../Landing";
 
 const appLayoutSettings = {
   bg: "indigo.800",
@@ -37,17 +38,18 @@ function App() {
                 <SignUp />
               </GuestRoute>
               <Container>
+                <PrivateRoute path="/reports">Reports Page</PrivateRoute>
                 <PrivateRoute path="/profile">
                   <Profile />
                 </PrivateRoute>
                 <PrivateRoute path="/transactions/:id/edit">
                   <EditTransaction />
                 </PrivateRoute>
-                <PrivateRoute path="/transactions" exact>
+                <PrivateRoute path="/transactions">
                   <Transactions />
                 </PrivateRoute>
                 <Route path="/" exact>
-                  Home Page
+                  <LandingPage />
                 </Route>
               </Container>
             </Switch>
