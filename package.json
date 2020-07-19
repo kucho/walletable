@@ -1,6 +1,6 @@
 {
   "name": "walletable",
-  "homepage": ".",
+  "homepage": "https://walletable.kucho.dev",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
