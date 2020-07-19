@@ -2,12 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink } from "react-router-dom";
 import {
+  FormControl,
   FormErrorMessage,
   FormLabel,
-  FormControl,
   Input,
-  Text,
   Link,
+  Text,
+  useToast,
 } from "@chakra-ui/core";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
@@ -33,10 +34,20 @@ const SignInForm = ({ style, onSuccess }) => {
     resolver: yupResolver(schema),
   });
 
+  const toast = useToast();
+
   const onSubmit = async (form, e) => {
     e.preventDefault();
-    const { data, error } = await loginUser(form);
-    if (!error) {
+    const { data } = await loginUser(form);
+    if (!data) {
+      toast({
+        description:
+          "Your email and password combination is wrong. Please try again.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
       onSuccess(data);
     }
   };
