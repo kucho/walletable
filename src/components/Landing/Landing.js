@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Icon, Image, Stack, Text } from "@chakra-ui/core";
 
 const Landing = () => {
   return (
-    <Flex>
+    <Flex flexGrow={1}>
       <Flex justify="space-evenly" w="100%" my="8rem" position="relative">
         <Box
           top="10%"

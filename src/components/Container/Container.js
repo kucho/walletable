@@ -1,8 +1,9 @@
 import { Flex, Image } from "@chakra-ui/core";
-import { Route, Link } from "react-router-dom";
+import { Route, Link as RouterLink } from "react-router-dom";
 import Header from "../Header";
 import logo from "../../images/logo.png";
 import React from "react";
+import { Link, Text, Icon } from "@chakra-ui/core";
 
 const appContentSettings = {
   fontFamily: "main",
@@ -10,16 +11,15 @@ const appContentSettings = {
   bg: "white",
   borderRadius: "lg",
   minH: 800,
-  mb: 10,
 };
 
 const Container = ({ children }) => {
   return (
     <Route>
       <Flex w="100%" padding="20px">
-        <Link to="/">
+        <RouterLink to="/">
           <Image src={logo} alt="Walletable" w="130px" h="30px" />
-        </Link>
+        </RouterLink>
       </Flex>
       <Flex
         {...appContentSettings}
@@ -32,6 +32,19 @@ const Container = ({ children }) => {
       >
         <Header />
         {children}
+        <Flex justify="center" my={3} color="gray.600">
+          <Text>
+            © Developed with ❤ ️by{" "}
+            <Link
+              textDecoration="underline"
+              isExternal
+              href="https://github.com/kucho"
+            >
+              Kucho
+              <Icon name="external-link" m="2px" />
+            </Link>
+          </Text>
+        </Flex>
       </Flex>
     </Route>
   );
