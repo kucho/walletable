@@ -38,8 +38,8 @@ const SignInForm = ({ style, onSuccess }) => {
 
   const onSubmit = async (form, e) => {
     e.preventDefault();
-    const { data } = await loginUser(form);
-    if (!data) {
+    const { data, error } = await loginUser(form);
+    if (error) {
       toast({
         description:
           "Your email and password combination is wrong. Please try again.",

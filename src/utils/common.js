@@ -71,10 +71,10 @@ export async function fetchWrapper(url, method, token, body) {
       if (response.status !== 204) {
         data = await response.json();
       }
-      return { data };
+      return data.error ? { error: data.error } : { data };
     } else {
       response.status === 401 && localStorage.clear();
-      return { error: response.errors };
+      return { error: response };
     }
   } catch (error) {
     return { error: "Network error" };

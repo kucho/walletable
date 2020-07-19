@@ -23,7 +23,6 @@ const Profile = () => {
   const handleSubmit = async (form, e) => {
     e.preventDefault();
     const { data, error } = await updateUser(cached.token, form);
-    console.log({ data, error });
     if (!error) {
       setUserData(data);
       localStorage.setItem(

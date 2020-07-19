@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Text, Link } from "@chakra-ui/core";
+import { Link, Text, useToast } from "@chakra-ui/core";
 import BigButton from "../Button/BigButton";
 import { createUser } from "../../services/user";
 import UserForm from "../UserForm";
@@ -14,10 +14,19 @@ const inputStyleSettings = {
 };
 
 const SignUpForm = ({ style, onSuccess }) => {
+  const toast = useToast();
+
   const handleSubmit = async (form, e) => {
     e.preventDefault();
     const { data, error } = await createUser(form);
-    if (!error) {
+    if (error) {
+      toast({
+        description: error,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
       onSuccess(data);
     }
   };
