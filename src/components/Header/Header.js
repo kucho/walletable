@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ScreenLink from "./ScreenLink";
 import { NavLink, useHistory } from "react-router-dom";
 import { Box, Flex, Link } from "@chakra-ui/core";
 import transactionIcon from "../../images/icons/transactions.svg";
 import reportsIcon from "../../images/icons/reports.svg";
+import { UserContext } from "../../context/userContext";
+import { isObjEmpty } from "../../utils/common";
 
 const Header = () => {
+  const { userData } = useContext(UserContext);
   let history = useHistory();
   return (
     <Flex p="15px">
@@ -43,7 +46,7 @@ const Header = () => {
               history.push("/signin");
             }}
           >
-            Logout
+            {isObjEmpty(userData) ? "Login" : "Logout"}
           </Link>
         </Box>
       </Flex>

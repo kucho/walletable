@@ -80,3 +80,8 @@ export async function fetchWrapper(url, method, token, body) {
     return { error: "Network error" };
   }
 }
+
+export function isObjEmpty(obj) {
+  for (const i in obj) return false;
+  return true;
+}
