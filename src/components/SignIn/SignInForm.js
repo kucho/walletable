@@ -62,6 +62,7 @@ const SignInForm = ({ style, onSuccess }) => {
           name="email"
           id="email"
           placeholder="youremail@domain.com"
+          autoComplete="email"
           ref={register}
           {...inputStyleSettings}
         />
@@ -74,6 +75,7 @@ const SignInForm = ({ style, onSuccess }) => {
         <Input
           id="password"
           name="password"
+          autoComplete="current-password"
           type="password"
           ref={register}
           {...inputStyleSettings}
