@@ -66,12 +66,11 @@ export async function fetchWrapper(url, method, token, body) {
     });
 
     let data;
-
     if (response.ok) {
       if (response.status !== 204) {
         data = await response.json();
       }
-      return data.error ? { error: data.error } : { data };
+      return data?.error ? { error: data.error } : { data };
     } else {
       response.status === 401 && localStorage.clear();
       return { error: response };
