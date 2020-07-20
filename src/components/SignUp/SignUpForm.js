@@ -23,10 +23,16 @@ const SignUpForm = ({ style, onSuccess }) => {
       toast({
         description: error,
         status: "error",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     } else {
+      toast({
+        description: "Welcome back!",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
       onSuccess(data);
     }
   };

@@ -64,12 +64,18 @@ const EditTransaction = ({ router }) => {
   const handleDelete = async () => {
     const { error } = await deleteTransaction(token, id);
     if (!error) {
+      toast({
+        description: "Transaction deleted successfully.",
+        status: "success",
+        duration: 4000,
+        isClosable: true,
+      });
       history.push("/transactions");
     } else {
       toast({
         description: "We could not delete this transaction. Try again.",
         status: "error",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     }

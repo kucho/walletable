@@ -44,14 +44,14 @@ const TransactionForm = ({ onCancel, onSuccess }) => {
       toast({
         description: "Transaction added successfully.",
         status: "success",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     } else {
       toast({
         description: "We could not add your transaction. Try again.",
         status: "error",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     }

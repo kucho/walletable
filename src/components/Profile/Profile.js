@@ -33,14 +33,14 @@ const Profile = () => {
       toast({
         description: "Your profile was updated successfully.",
         status: "success",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     } else {
       toast({
         description: "We could not update your profile. Try again.",
         status: "error",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     }

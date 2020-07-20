@@ -44,7 +44,7 @@ const SignInForm = ({ style, onSuccess }) => {
         description:
           "Your email and password combination is wrong. Please try again.",
         status: "error",
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
       });
     } else {
